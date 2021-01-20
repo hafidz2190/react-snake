@@ -11,7 +11,7 @@ const DIRECTION = {
 };
 const DELAY = 50;
 const SNAKES = [4, 3, 2, 1, 0];
-const FOODS = [39];
+const FOODS = [];
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
@@ -50,10 +50,25 @@ function App() {
     max = Math.floor(max);
 
     return Math.floor(Math.random() * (max - min) + min);
+  };
+
+  const generateRandomFoods = () => {
+    const newFoods = [];
+
+    do {
+      let newFood = getRandomInt(0, WORLD_WIDTH * WORLD_HEIGHT);
+
+      if (snakes.indexOf(newFood) === -1 && newFoods.indexOf(newFood) === -1) {
+        newFoods.push(newFood);
+      }
+    } while(newFoods.length < 3);
+
+    setFoods(newFoods);
   }
 
   const generateFoods = (currentSnakes, currentFoods) => {
     let newFood = 0;
+
     do {
       newFood = getRandomInt(0, WORLD_WIDTH * WORLD_HEIGHT);
     } while (currentSnakes.indexOf(newFood) !== -1 || currentFoods.indexOf(newFood) !== -1);
@@ -139,6 +154,10 @@ function App() {
   };
 
   const findFood = () => {
+    if (disableEventRef.current) {
+      return;
+    }
+
     const food = foods[0];
     const head = snakes[0];
    
@@ -281,7 +300,9 @@ function App() {
     directionRef.current = DIRECTION.RIGHT;
     disableEventRef.current = false;
 
-    // document.addEventListener('keydown', keydownHandler);
+    generateRandomFoods();
+
+    document.addEventListener('keydown', keydownHandler);
   }, []);
 
   useInterval(() => {
@@ -321,8 +342,8 @@ function App() {
   };
 
   const playAgainHandler = () => {
-    setSnakes([4, 3, 2, 1, 0]);
-    setFoods([39]);
+    setSnakes(SNAKES);
+    generateRandomFoods();
     setLose(false);
     setEat(0);
     directionRef.current = DIRECTION.RIGHT;
