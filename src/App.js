@@ -356,20 +356,27 @@ function App() {
         <div className="info">
           <span>react-snake</span>
           <br />
+          <br />
           <span>-----</span>
+          <br />
           <br />
           <span>highest score: {highestScore}</span>
           <br />
+          <br />
           <span>-----</span>
           <br />
+          <br />
           <span>food eaten: {eat}</span>
+          <br />
           <br />
           <span>snake's size: {snakes.length}</span>
           {
             lose && (
               <>
                 <br />
+                <br />
                 <span>-----</span>
+                <br />
                 <br />
                 <span>lose, </span>
                 <span className="play-again" onClick={playAgainHandler}>play again</span>
