@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from 'react';
 import './App.scss';
 
@@ -64,7 +65,7 @@ function App() {
     } while(newFoods.length < 3);
 
     setFoods(newFoods);
-  }
+  };
 
   const generateFoods = (currentSnakes, currentFoods) => {
     let newFood = 0;
