@@ -1,3 +1,5 @@
+# react-snake
+
 snake game (sort of) with dumb ai built using react
 
 - favicon: favicon.io - https://favicon.io/emoji-favicons/snake
